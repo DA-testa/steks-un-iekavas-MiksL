@@ -1,8 +1,8 @@
 # python3
+# Miks Lapsa 221RDB247
 # Suggestion - have clearer instructions on how the user input should work and how the automatic tests approach the problem, like an example of the automatic test input.
 
 from collections import namedtuple
-import os
 
 Bracket = namedtuple("Bracket", ["char", "position"])
 
@@ -39,32 +39,30 @@ def find_mismatch(text):
 # Use an input to choose files or input - F or I (Capital i) If input I, wait for user to input a string manually
 def main():
     #print("Choose an input method: F - Existing test from the test folder, I - Manual input"")
-    text = input()
-    if("\n" in text):
-        print("New Line char being used")
-    
-    if(text == "F"):
-        # Read the text from the test files in the "test" folder, get a ilst of the files and present a choice to the user
-        files = os.listdir("test")
+    while True:
+        inputType = input()
         
-        #print("Choose a file to use as as a test input case from 0-5:")
+        # Check the first character of the input
+        if(inputType[:1] == "F"):
+            #print("Input the name of the file you want to use for testing")
+            fileName = input()
+            try:
+                with open(fileName) as readableFile:
+                    text = readableFile.read()
+            except FileNotFoundError:
+                print("Invalid file name or path")
+                return
+        elif(inputType[:1] == "I"):
+            text = input() # Gets whatever the user is willing to input
+        else:
+            print("Invalid input character")
+            return # A return is placed so a false find_mismatch result is not output after the Invalid input message
         
-        # Get the user input and convert it to an integer
-        chosen_input_file = int(input())
-        
-        # Open the file, read the first line and pass it to the find_mismatch function for processing
-        text = open("test/" + files[chosen_input_file], "r").readline()
-    elif(text == "I"):
-        print("test input is I")
-        text = input() # Gets whatever the user is willing to input
-        print(text)
-    else:
-        print("Invalid input")
-        print(text)
-        return # A return is placed so a false find_mismatch result is not output after the Invalid input message
-        
-    mismatch = find_mismatch(text)
-    print(mismatch) # Output the result of the find_mismatch function
+        mismatch = find_mismatch(text)
+        print(mismatch) # Output the result of the find_mismatch function
+        # We break out of the loop because the test was completed and there is no need for the user to input another string again
+        # Break can only be accessed if the user has inputted a valid input
+        break
 
 
 if __name__ == "__main__":
