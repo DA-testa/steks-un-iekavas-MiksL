@@ -39,6 +39,7 @@ def find_mismatch(text):
 def main():
     #print("Choose an input method: F - Existing test from the test folder, I - Manual input"")
     text = input()
+    '''
     if(text == "F"):
         # Read the text from the test files in the "test" folder, get a ilst of the files and present a choice to the user
         files = os.listdir("test")
@@ -55,7 +56,9 @@ def main():
     else:
         print("Invalid input")
         return # A return is placed so a false find_mismatch result is not output after the Invalid input message
-        
+    '''
+    
+    print(text)
     mismatch = find_mismatch(text)
     print(mismatch) # Output the result of the find_mismatch function
 
