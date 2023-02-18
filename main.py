@@ -1,6 +1,7 @@
 # python3
 
 from collections import namedtuple
+import os
 
 Bracket = namedtuple("Bracket", ["char", "position"])
 
@@ -34,8 +35,27 @@ def find_mismatch(text):
         return "Success" # We return success if no mismatches were found during the execution of the loop and the stack is empty
 
 
+# Use an input to choose files or input - F or I (Capital i) If input I, wait for user to input a string manually
 def main():
+    #print("Choose an input method: F - Existing test from the test folder, I - Manual input"")
     text = input()
+    if(text == "F"):
+        # Read the text from the test files in the "test" folder, get a ilst of the files and present a choice to the user
+        files = os.listdir("test")
+        
+        #print("Choose a file to use as as a test input case from 0-5:")
+        
+        # Get the user input and convert it to an integer
+        chosen_input_file = int(input())
+        
+        # Open the file, read the first line and pass it to the find_mismatch function for processing
+        text = open("test/" + files[chosen_input_file], "r").readline()
+    elif(text == "I"):
+        text = input() # Gets whatever the user is willing to input
+    else:
+        print("Invalid input")
+        return # A return is placed so a false find_mismatch result is not output after the Invalid input message
+        
     mismatch = find_mismatch(text)
     print(mismatch) # Output the result of the find_mismatch function
 
