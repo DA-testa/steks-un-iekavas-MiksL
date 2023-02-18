@@ -1,4 +1,5 @@
 # python3
+# Suggestion - have clearer instructions on how the user input should work and how the automatic tests approach the problem, like an example of the automatic test input.
 
 from collections import namedtuple
 import os
@@ -39,7 +40,6 @@ def find_mismatch(text):
 def main():
     #print("Choose an input method: F - Existing test from the test folder, I - Manual input"")
     text = input()
-    '''
     if(text == "F"):
         # Read the text from the test files in the "test" folder, get a ilst of the files and present a choice to the user
         files = os.listdir("test")
@@ -52,13 +52,14 @@ def main():
         # Open the file, read the first line and pass it to the find_mismatch function for processing
         text = open("test/" + files[chosen_input_file], "r").readline()
     elif(text == "I"):
+        print("test input is I")
         text = input() # Gets whatever the user is willing to input
+        print(text)
     else:
         print("Invalid input")
+        print(text)
         return # A return is placed so a false find_mismatch result is not output after the Invalid input message
-    '''
-    
-    print(text)
+        
     mismatch = find_mismatch(text)
     print(mismatch) # Output the result of the find_mismatch function
 
