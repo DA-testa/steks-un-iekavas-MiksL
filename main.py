@@ -41,6 +41,8 @@ def main():
     #print("Choose an input method: F - Existing test from the test folder, I - Manual input"")
     while True:
         text = input()
+        if(text == ""):
+            text = "enter or empty"
         print(text)
         
         if(text == "F"):
