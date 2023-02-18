@@ -39,29 +39,29 @@ def find_mismatch(text):
 # Use an input to choose files or input - F or I (Capital i) If input I, wait for user to input a string manually
 def main():
     #print("Choose an input method: F - Existing test from the test folder, I - Manual input"")
-    while True:
-        text = input()
-        if(text == ""):
-            text = "enter or empty"
-        print(text)
+    text = input()
+    if("\n" in text):
+        print("New Line char being used")
+    
+    if(text == "F"):
+        # Read the text from the test files in the "test" folder, get a ilst of the files and present a choice to the user
+        files = os.listdir("test")
         
-        if(text == "F"):
-            # Read the text from the test files in the "test" folder, get a ilst of the files and present a choice to the user
-            files = os.listdir("test")
-            
-            #print("Choose a file to use as as a test input case from 0-5:")
-            
-            # Get the user input and convert it to an integer
-            chosen_input_file = int(input())
-            
-            # Open the file, read the first line and pass it to the find_mismatch function for processing
-            text = open("test/" + files[chosen_input_file], "r").readline()
-            break
-        elif(text == "I"):
-            print("test input is I")
-            text = input() # Gets whatever the user is willing to input
-            print(text)
-            break
+        #print("Choose a file to use as as a test input case from 0-5:")
+        
+        # Get the user input and convert it to an integer
+        chosen_input_file = int(input())
+        
+        # Open the file, read the first line and pass it to the find_mismatch function for processing
+        text = open("test/" + files[chosen_input_file], "r").readline()
+    elif(text == "I"):
+        print("test input is I")
+        text = input() # Gets whatever the user is willing to input
+        print(text)
+    else:
+        print("Invalid input")
+        print(text)
+        return # A return is placed so a false find_mismatch result is not output after the Invalid input message
         
     mismatch = find_mismatch(text)
     print(mismatch) # Output the result of the find_mismatch function
